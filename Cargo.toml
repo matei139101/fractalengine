@@ -4,4 +4,4 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-fractalengine-core = { git = "https://github.com/matei139101/fractalengine-core", tag = "v0.1.0" }
+winit = "0.30.13"
