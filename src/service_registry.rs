@@ -39,6 +39,12 @@ impl Scheduler {
         Self{service_registry} 
     }
 
+    pub fn schedule_lifecycle_init_hook(&mut self) {
+        for hook in self.service_registry.lifecycle_hooks() {
+            hook.init();
+        }
+    }
+
     pub fn schedule_lifecycle_update_hook(&mut self) {
         for hook in self.service_registry.lifecycle_hooks() {
             hook.update();

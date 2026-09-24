@@ -12,6 +12,8 @@ impl FractalEngine {
     }
 
     pub fn run(&mut self) {
+        self.scheduler.schedule_lifecycle_init_hook();
+
         let event_loop = EventLoop::new().unwrap();
 
         event_loop.set_control_flow(ControlFlow::Poll);
