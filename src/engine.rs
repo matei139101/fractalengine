@@ -1,14 +1,15 @@
 use winit::event_loop::{ControlFlow, EventLoop};
 
-use crate::{Scheduler, ServiceRegistry, app::App};
+use crate::{Scheduler, ServiceRegistry, app::App, debugger::Debugger};
 
 pub struct FractalEngine {
-    scheduler: Scheduler
+    scheduler: Scheduler,
 }
 
 impl FractalEngine {
     pub fn new(service_registry: ServiceRegistry) -> Self {
-        Self { scheduler: Scheduler::new(service_registry) }
+        Self {
+            scheduler: Scheduler::new(service_registry) }
     }
 
     pub fn run(&mut self) {

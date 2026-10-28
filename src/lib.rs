@@ -1,6 +1,7 @@
 mod engine;
 mod service_registry;
 mod app;
+mod debugger;
 
 pub use engine::FractalEngine;
 pub use service_registry::ServiceRegistry;

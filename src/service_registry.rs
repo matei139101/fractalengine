@@ -1,5 +1,7 @@
 use std::{rc::Rc};
 
+use crate::log;
+
 pub struct ServiceRegistry {
     services: Vec<Rc<dyn Service>>,
     lifecycle_services: Vec<Rc<dyn LifeCycleHook>>,
@@ -40,6 +42,7 @@ impl Scheduler {
     }
 
     pub fn schedule_lifecycle_init_hook(&mut self) {
+        log!(Self, );
         for hook in self.service_registry.lifecycle_hooks() {
             hook.init();
         }
