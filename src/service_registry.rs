@@ -42,15 +42,23 @@ impl Scheduler {
     }
 
     pub fn schedule_lifecycle_init_hook(&mut self) {
-        log!(Self, );
+        log!(Self, Info, "Calling lifecycle init hooks...");
         for hook in self.service_registry.lifecycle_hooks() {
             hook.init();
         }
     }
 
     pub fn schedule_lifecycle_update_hook(&mut self) {
+        log!(Self, Info, "Calling lifecycle init hooks...");
         for hook in self.service_registry.lifecycle_hooks() {
             hook.update();
+        }
+    }
+
+    pub fn schedule_lifecycle_cleanup_hook(&mut self) {
+        log!(Self, Info, "Calling lifecycle cleanup hooks...");
+        for hook in self.service_registry.lifecycle_hooks() {
+            hook.cleaup();
         }
     }
 }
@@ -62,4 +70,5 @@ pub trait Service {
 pub trait LifeCycleHook {
     fn init(&self);
     fn update(&self);
+    fn cleaup(&self);
 }
