@@ -1,12 +1,13 @@
-use std::{any::TypeId, sync::RwLock};
+use std::{any::TypeId, collections::HashMap, sync::{LazyLock, RwLock}};
 
 pub struct Debugger {
     logs: RwLock<Vec<Log>>,
+    debug_values: RwLock<HashMap<String, String>>
 }
 
 impl Debugger {
     pub fn new() -> Self {
-        Self { logs: RwLock::new(Vec::new()) }
+        Self { logs: RwLock::default(), debug_values: RwLock::default() }
     }
 
     pub fn log(
@@ -51,9 +52,7 @@ pub enum LogSeverity {
     Critical,
 }
 
-pub static DEBUGGER: Debugger = Debugger {
-    logs: RwLock::new(Vec::new()),
-};
+pub static DEBUGGER: LazyLock<Debugger> = LazyLock::new(Debugger::new);
 
 #[macro_export]
 macro_rules! log {

@@ -1,4 +1,4 @@
-use std::{rc::Rc};
+use std::{ rc::Rc};
 
 use crate::log;
 
@@ -65,6 +65,7 @@ impl Scheduler {
 
 pub trait Service {
     fn get_name(&self) -> &str;
+    fn register(self, service_registry: &mut ServiceRegistry);
 }
 
 pub trait LifeCycleHook {
