@@ -1,15 +1,16 @@
 use winit::{application::ApplicationHandler, event::WindowEvent, keyboard::PhysicalKey, window::Window};
 
-use crate::{Scheduler};
+use crate::{Scheduler, ServiceRegistry};
 
 pub struct App<'a> {
     window: Option<Window>,
-    scheduler: &'a mut Scheduler
+    scheduler: &'a mut Scheduler,
+    service_registry: &'a mut ServiceRegistry,
 }
 
 impl<'a> App<'a> {
-    pub fn new(scheduler: &'a mut Scheduler) -> Self {
-        Self { window: Option::None, scheduler }
+    pub fn new(scheduler: &'a mut Scheduler, service_registry: &'a mut ServiceRegistry) -> Self {
+        Self { window: Option::None, scheduler, service_registry }
     }
 }
 
@@ -31,7 +32,7 @@ impl ApplicationHandler for App<'_> {
                 event_loop.exit();
             }
             WindowEvent::RedrawRequested => {
-                self.scheduler.schedule_lifecycle_update_hook();
+                self.scheduler.schedule_lifecycle_update_hook(self.service_registry);
                 self.window.as_ref().unwrap().request_redraw();
             }
             WindowEvent::KeyboardInput {
